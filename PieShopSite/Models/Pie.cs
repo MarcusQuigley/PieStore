@@ -4,7 +4,7 @@ namespace PieShopSite.Models
 {
     public class Pie
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string ShortDescription { get; set; }
@@ -14,7 +14,7 @@ namespace PieShopSite.Models
         public string ImageThumbnailUrl { get; set; }
         public bool IsPieOfWeek { get; set; }
         public bool InStock { get; set; }
-        public int Categoryid { get; set; }
+        public int CategoryId { get; set; }
         public Category Category { get; set; }
 
     }

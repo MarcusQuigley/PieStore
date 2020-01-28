@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PieShopSite.Services;
@@ -14,13 +16,22 @@ namespace PieShopSite
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        public IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration)
+        {
+            this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IPieRepository, MockPieRepository>();
-            services.AddScoped<ICategoryRepository, MockCategoryRepository>();
+             services.AddScoped<IPieRepository,  PieRepository>();
+             services.AddScoped<ICategoryRepository,  CategoryRepository>();
             services.AddControllersWithViews();
+            services.AddDbContext<PieContext>(options =>
+            {
+                var connString = Configuration.GetConnectionString("DbConnection");
+                options.UseSqlServer(connString);
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,6 +10,6 @@ namespace PieShopSite.Services
     {
         IEnumerable<Pie> AllPies { get;  }
         IEnumerable<Pie> PiesOfWeek { get;  }
-        Pie GetPie(Guid id);
+        Pie GetPie(int id);
     }
 }
