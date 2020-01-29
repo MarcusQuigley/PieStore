@@ -2,9 +2,6 @@
 using PieShopSite.Services;
 using PieShopSite.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PieShopSite.Controllers
 {
@@ -19,7 +16,7 @@ namespace PieShopSite.Controllers
             this.categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
         }
 
-        public ViewResult List()
+        public IActionResult List()
         {
             var viewModel = new PiesListViewModel();
             viewModel.Pies = pieRepository.AllPies;
@@ -27,16 +24,14 @@ namespace PieShopSite.Controllers
             return View(viewModel);
         }
 
-        public IActionResult Detail(int pieId)
+        public IActionResult Detail(int id)
         {
-            var pie = pieRepository.GetPie(pieId);
+            var pie = pieRepository.GetPie(id);
             if (pie == null)
             {
                 return NotFound();
             }
-            var pieDetailVM = new PieDetailViewModel();
-            pieDetailVM.Pie = pie;
-            return View(pieDetailVM);
+             return View(pie);
         }
     }
 
