@@ -26,6 +26,18 @@ namespace PieShopSite.Controllers
             viewModel.CurrentCategory = "Cheese cakes";
             return View(viewModel);
         }
+
+        public IActionResult Detail(int pieId)
+        {
+            var pie = pieRepository.GetPie(pieId);
+            if (pie == null)
+            {
+                return NotFound();
+            }
+            var pieDetailVM = new PieDetailViewModel();
+            pieDetailVM.Pie = pie;
+            return View(pieDetailVM);
+        }
     }
 
 }

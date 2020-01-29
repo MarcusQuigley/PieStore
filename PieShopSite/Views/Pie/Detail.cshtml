@@ -1,0 +1,14 @@
+﻿@model PieShopSite.ViewModels.PieDetailViewModel
+<h3>Detail for @Model.Pie.Name</h3>
+    <div class="col-sm-4 col-lg-4 col-md-4">
+        <div class="thumbnail">
+            <img src="@Model.Pie.ImageThumbnailUrl" alt="">
+            <div class="caption">
+                <h3 class="pull-right">@Model.Pie.Price.ToString("c")</h3>
+                <h3>
+                    <a>@Model.Pie.Name</a>
+                </h3>
+                <p>@Model.Pie.Description</p>
+            </div>
+        </div>
+    </div>
