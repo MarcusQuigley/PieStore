@@ -19,11 +19,11 @@ namespace PieShopSite.Services.MockRepos
         public IEnumerable<Pie> AllPies => dbContext.Pies;
 
 
-        public IEnumerable<Pie> PiesOfWeek => dbContext.Pies.Where(p => p.IsPieOfWeek);
+        public IEnumerable<Pie> PiesOfWeek => dbContext.Pies.Where(p => p.IsPieOfTheWeek);
 
         public Pie GetPie(int id)
         {
-            return dbContext.Pies.SingleOrDefault(p => p.Id == id);
+            return dbContext.Pies.SingleOrDefault(p => p.PieId == id);
         }
     }
 }
