@@ -1,0 +1,8 @@
+﻿@model HomeViewModel
+<h3>in index</h3>
+@{ 
+    foreach (Pie pie in Model.PiesOfWeek)
+    {
+        <partial name="_PieCard" model="pie"/>
+    }
+}

@@ -1,0 +1,19 @@
+﻿@model CartViewModel
+    <tbody>
+        @{
+            foreach (var item in Model.Cart.ShoppingCartItems)
+            {
+                <h1>@item.Amount</h1>
+                <h1>@item.Pie.Name</h1>
+                <h1>@item.Pie.Price.ToString("c")</h1>
+                <h1>@((item.Amount *  item.Pie.Price).ToString("c"))</h1>
+            }
+        }
+    </tbody>
+<tfoot>
+    <tr>
+        <h1>  cart total @Model.Total.ToString("c")</h1>
+    </tr>
+</tfoot>
+
+

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PieShopSite.Services.MockRepos
+namespace PieShopSite.Services
 {
     public class CategoryRepository : ICategoryRepository
     {

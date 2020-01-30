@@ -1,10 +1,11 @@
-﻿using PieShopSite.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PieShopSite.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PieShopSite.Services.MockRepos
+namespace PieShopSite.Services
 {
     public class PieRepository : IPieRepository
     {
@@ -16,10 +17,10 @@ namespace PieShopSite.Services.MockRepos
             this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public IEnumerable<Pie> AllPies => dbContext.Pies;
+        public IEnumerable<Pie> AllPies => dbContext.Pies.Include(p => p.Category);
 
 
-        public IEnumerable<Pie> PiesOfWeek => dbContext.Pies.Where(p => p.IsPieOfTheWeek);
+        public IEnumerable<Pie> PiesOfWeek => dbContext.Pies.Include(p => p.Category).Where(p => p.IsPieOfTheWeek);
 
         public Pie GetPie(int id)
         {
