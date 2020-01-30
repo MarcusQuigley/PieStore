@@ -2,7 +2,7 @@
 using PieShopSite.Services;
 using PieShopSite.ViewModels;
 using System;
-
+using System.Linq;
 namespace PieShopSite.Controllers
 {
     public class PieController : Controller
@@ -16,11 +16,19 @@ namespace PieShopSite.Controllers
             this.categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
         }
 
-        public IActionResult List()
+        public IActionResult List(string category)
         {
             var viewModel = new PiesListViewModel();
-            viewModel.Pies = pieRepository.AllPies;
-            viewModel.CurrentCategory = "Cheese cakes";
+            if (string.IsNullOrEmpty(category))
+            {
+                viewModel.Pies = pieRepository.AllPies;
+                viewModel.CurrentCategory = "All pies";
+            }
+            else
+            {
+                viewModel.Pies = pieRepository.AllPies.Where(p => p.Category.CategoryName == category);
+                viewModel.CurrentCategory = categoryRepository.AllCategories.FirstOrDefault(c => c.CategoryName == category).CategoryName;
+            }
             return View(viewModel);
         }
 
@@ -33,6 +41,11 @@ namespace PieShopSite.Controllers
             }
              return View(pie);
         }
+
+        //public IActionResult List(int categoryId)
+        //{
+
+        //}
     }
 
 }
