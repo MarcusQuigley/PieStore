@@ -9,8 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PieShopSite.Models;
 using PieShopSite.Services;
-using PieShopSite.Services.MockRepos;
+ 
 
 namespace PieShopSite
 {
@@ -23,8 +24,11 @@ namespace PieShopSite
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+            services.AddSession();
              services.AddScoped<IPieRepository,  PieRepository>();
              services.AddScoped<ICategoryRepository,  CategoryRepository>();
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
             services.AddControllersWithViews();
             services.AddDbContext<PieContext>(options =>
             {
@@ -43,6 +47,7 @@ namespace PieShopSite
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 

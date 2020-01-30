@@ -9,5 +9,14 @@
             </h3>
             <p>@Model.ShortDescription</p>
         </div>
+        <div class="addToCart">
+            <p class="button">
+                <a class="btn btn-primary" 
+                   asp-controller="Cart" 
+                   asp-action="AddToCart" 
+                   asp-route-id="@Model.PieId">Add</a>
+
+            </p>
+        </div>
     </div>
 </div>
