@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PieShopSite;
 
 namespace PieShopSite.Migrations
 {
     [DbContext(typeof(PieContext))]
-    partial class PieContextModelSnapshot : ModelSnapshot
+    [Migration("20200130161927_orderdetails")]
+    partial class orderdetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,6 +103,7 @@ namespace PieShopSite.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(25)")
                         .HasMaxLength(25);
 
@@ -109,6 +112,7 @@ namespace PieShopSite.Migrations
                         .HasMaxLength(10);
 
                     b.Property<string>("ZipCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
